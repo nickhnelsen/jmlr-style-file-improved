@@ -58,6 +58,7 @@
 \RequirePackage{amssymb}
 \RequirePackage{natbib}
 \RequirePackage{graphicx}
+\RequirePackage{amsthm} % NHN edit March 2025.
 
 \if@usehyper
 \RequirePackage[colorlinks=false,allbordercolors={1 1 1}]{hyperref}
@@ -113,13 +114,14 @@
      \addpenalty{\@secpenalty}\addvspace{\@tempskipa}\fi \@ifstar
      {\@ssect{#3}{#4}{#5}{#6}}{\@dblarg{\@sict{#1}{#2}{#3}{#4}{#5}{#6}}}}
 
+% NHN edit March 2025, add period after svsec
 \def\@sict#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
      \def\@svsec{}\else
      \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname}\fi
      \@tempskipa #5\relax
       \ifdim \@tempskipa>\z@
         \begingroup #6\relax
-          \@hangfrom{\hskip #3\relax\@svsec\hskip 0.1em}
+          \@hangfrom{\hskip #3\relax\@svsec.\hskip 0.1em}
                     {\interlinepenalty \@M #8\par}
         \endgroup
        \csname #1mark\endcsname{#7}\addcontentsline
@@ -134,6 +136,7 @@
      \@xsect{#5}}
 
 % Title each appendix with `Appendix` before its letter
+% NHN edit March 2025, add period after svsec
 \let\originalJMLRappendix\appendix
 \renewcommand{\appendix}{
 \originalJMLRappendix    
@@ -177,8 +180,10 @@
                        #7}}\fi
      \@xsect{#5}}
 
+% NHN March 2025: add trailing periods and \def\thesubsubsection
 \def\thesection {\arabic{section}}
-\def\thesubsection {\thesection.\arabic{subsection}}
+\def\thesubsection {\thesection.\arabic{subsection}.}
+\def\thesubsubsection {\thesubsection\arabic{subsubsection}.}
 \def\section{\@startsiction{section}{1}{\z@}{-0.24in}{0.10in}
              {\large\bf\raggedright}}
 \def\subsection{\@startsection{subsection}{2}{\z@}{-0.20in}{0.08in}
@@ -300,10 +305,10 @@
 \def\firstpageno#1{\setcounter{page}{#1}}
 
 \def\jmlrheading#1#2#3#4#5#6#7{\def\ps@jmlrtps{\let\@mkboth\@gobbletwo%
+% NHN March 2025: remove copyright from preprint option
 \if@preprint
-\def\@oddhead{} % empty header if its a preprint
-\def\@oddfoot{\parbox[t]{\textwidth}{\raggedright \scriptsize \copyright #2 #7.\\[5pt] 
-License: CC-BY 4.0, see \url{https://creativecommons.org/licenses/by/4.0/}.\hfill}}%
+\def\@oddhead{}% empty header if its a preprint
+\def\@oddfoot{}%
 \else
 \def\@oddhead{\scriptsize Journal of Machine Learning Research #1 (#2) #3 \hfill Submitted #4; Published #5}%
 \def\@oddfoot{\parbox[t]{\textwidth}{\raggedright \scriptsize \copyright #2 #7.\\[5pt] 
@@ -379,13 +384,15 @@ are provided at \url{http://jmlr.org/papers/v#1/#6.html}.\hfill}}%
 %                               PROOF, THEOREM, and FRIENDS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% NHN March 2025: fix proof environment to allow custom proof names
 \newcommand{\BlackBox}{\rule{1.5ex}{1.5ex}}  % end of proof
 \ifdefined\proof
-    \renewenvironment{proof}{\par\noindent{\bf Proof\ }}{\hfill\BlackBox\\[2mm]}
+	\renewenvironment{proof}[1][\proofname]{\par\noindent{\bf #1.\ }}{\hfill\BlackBox\\[2mm]}
 \else
-    \newenvironment{proof}{\par\noindent{\bf Proof\ }}{\hfill\BlackBox\\[2mm]}
+    \newenvironment{proof}[1][\proofname]{\par\noindent{\bf #1.\ }}{\hfill\BlackBox\\[2mm]}
 \fi
-\newtheorem{example}{Example} 
+
+% NHN March 2025: add example counter and other environments
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma} 
 \newtheorem{proposition}[theorem]{Proposition} 
@@ -394,3 +401,9 @@ are provided at \url{http://jmlr.org/papers/v#1/#6.html}.\hfill}}%
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{example}[theorem]{Example} 
+\newtheorem{assumption}[theorem]{Assumption} 
+\newtheorem{notation}[theorem]{Notation}
+% No counters
+\newtheorem{problem}{Problem}
+\newtheorem{main}{Main Theorem}
