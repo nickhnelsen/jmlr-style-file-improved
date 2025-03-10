@@ -14,4 +14,4 @@ Notable changes to `jmlr2e.sty` include:
 Notable changes to `sample.tex` include:
 - Default to "nohyperref" option
 - Load hyperref with custom link colors and pagebackref
-- Add sample theorem and proof environments with custon names
+- Add sample theorem and proof environments with custom names
