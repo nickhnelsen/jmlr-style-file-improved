@@ -385,11 +385,12 @@ are provided at \url{http://jmlr.org/papers/v#1/#6.html}.\hfill}}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % NHN March 2025: fix proof environment to allow custom proof names
+% Lineo fix: https://github.com/melba-journal/submission/pull/2/files
 \newcommand{\BlackBox}{\rule{1.5ex}{1.5ex}}  % end of proof
 \ifdefined\proof
-	\renewenvironment{proof}[1][\proofname]{\par\noindent{\bf #1.\ }}{\hfill\BlackBox\\[2mm]}
+	\renewenvironment{proof}[1][\proofname]{\par\noindent{\bf #1.\ }}{\hfill\BlackBox\\\vspace{2mm}}
 \else
-    \newenvironment{proof}[1][\proofname]{\par\noindent{\bf #1.\ }}{\hfill\BlackBox\\[2mm]}
+    \newenvironment{proof}[1][\proofname]{\par\noindent{\bf #1.\ }}{\hfill\BlackBox\\\vspace{2mm}}
 \fi
 
 % NHN March 2025: add example counter and other environments
