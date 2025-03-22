@@ -39,6 +39,9 @@
 	\fi
 }
 
+% Patch cleveref by defining theorems here (REQUIRED)
+\input{patch_cleveref.tex}
+
 % Definitions of handy macros can go here
 
 \newcommand{\dataset}{{\cal D}}
@@ -116,10 +119,10 @@ More information about this disclosure can be found on the JMLR website.}
 %In this appendix we prove the following theorem from
 %Section~\ref{sec:textree-generalization}:
 
-In this appendix we prove the following theorem from
+In this appendix we prove the following lemma from
 Section~6.2:
 
-\begin{theorem}[discrete]\label{thm:my_thm}
+\begin{lemma}[discrete]\label{thm:my_thm}
 	Let $u,v,w$ be discrete variables such that $v, w$ do
 	not co-occur with $u$ (i.e., $u\neq0\;\Rightarrow \;v=w=0$ in a given
 	dataset $\dataset$). Let $N_{v0},N_{w0}$ be the number of data points for
@@ -130,15 +133,15 @@ Section~6.2:
 	N_{v0} \;>\; N_{w0}\;\;\Rightarrow\;\;I_{uv} \;\leq\;I_{uw}
 	\]
 	with equality only if $u$ is identically 0.
-\end{theorem}
+\end{lemma}
 
 \begin{proof}
 	Left to the reader.
 \end{proof}
 
 \section{More Proofs}
-We now prove the theorem from Appendix~\ref{app:theorem}.
-\begin{proof}[Proof of Theorem~\ref{thm:my_thm}]
+We now prove \cref{thm:my_thm} from \cref{app:theorem}.
+\begin{proof}[Proof of \cref{thm:my_thm}]
 	We use the notation:
 	\[
 	P_v(i) \;=\;\frac{N_v^i}{N},\;\;\;i \neq 0;\;\;\;
